@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Roast Generator 🔥</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,8 +14,8 @@
         }
 
         body {
-            font-family: 'Arial Black', sans-serif;
-            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -37,26 +39,20 @@
 
         h1 {
             font-size: 3em;
-            color: #FF6B6B;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .flame {
-            font-size: 2.5em;
-            animation: flicker 1.5s infinite;
-        }
-
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+            font-weight: 900;
         }
 
         .subtitle {
             color: #666;
             font-size: 1.1em;
-            font-family: Arial, sans-serif;
-            font-weight: normal;
+        }
+
+        .backend-url-section {
+            display: none;
         }
 
         .warning {
@@ -66,16 +62,11 @@
             padding: 15px;
             margin-bottom: 25px;
             text-align: center;
-            font-family: Arial, sans-serif;
         }
 
         .warning-text {
             color: #856404;
-            font-weight: bold;
-        }
-
-        .input-section {
-            margin-bottom: 25px;
+            font-weight: 600;
         }
 
         .input-tabs {
@@ -87,24 +78,18 @@
         .tab-btn {
             flex: 1;
             padding: 12px;
-            border: 3px solid #ddd;
+            border: 3px solid #e0e0e0;
             background: white;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            font-size: 14px;
+            font-weight: 600;
         }
 
         .tab-btn.active {
             border-color: #FF6B6B;
-            background: #FF6B6B;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
             color: white;
-        }
-
-        .tab-btn:hover {
-            transform: scale(1.02);
         }
 
         .input-content {
@@ -117,20 +102,18 @@
 
         label {
             display: block;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
+            font-weight: 600;
             color: #333;
             margin-bottom: 10px;
-            font-size: 1.1em;
         }
 
         textarea {
             width: 100%;
             padding: 15px;
-            border: 3px solid #FF6B6B;
+            border: 3px solid #e0e0e0;
             border-radius: 12px;
             font-size: 16px;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             resize: vertical;
             min-height: 100px;
             transition: all 0.3s;
@@ -138,32 +121,22 @@
 
         textarea:focus {
             outline: none;
-            border-color: #FF8E53;
-            box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+            border-color: #FF6B6B;
         }
 
         .image-upload-area {
-            border: 3px dashed #FF6B6B;
+            border: 3px dashed #e0e0e0;
             border-radius: 12px;
             padding: 30px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            background: #FFF5F5;
+            background: #fafafa;
         }
 
         .image-upload-area:hover {
-            background: #FFE5E5;
-            border-color: #FF8E53;
-        }
-
-        .image-upload-area.has-image {
-            border-style: solid;
-            padding: 15px;
-        }
-
-        #imageInput {
-            display: none;
+            background: #f0f0f0;
+            border-color: #FF6B6B;
         }
 
         .upload-icon {
@@ -173,11 +146,9 @@
 
         .upload-text {
             color: #666;
-            font-family: Arial, sans-serif;
-            font-size: 1.1em;
         }
 
-        #imagePreview {
+        #imagePreview, #imagePreviewBoth {
             max-width: 100%;
             max-height: 300px;
             border-radius: 10px;
@@ -193,54 +164,35 @@
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-        }
-
-        .remove-image-btn:hover {
-            background: #CF1322;
-        }
-
-        .roast-level {
-            margin-bottom: 25px;
+            font-weight: 600;
+            display: none;
         }
 
         .level-buttons {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
+            margin-bottom: 25px;
         }
 
         .level-btn {
             padding: 15px;
-            border: 3px solid #ddd;
+            border: 3px solid #e0e0e0;
             background: white;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .level-btn:hover {
-            transform: scale(1.05);
+            font-weight: 600;
         }
 
         .level-btn.active {
-            border-color: #FF6B6B;
-            background: #FF6B6B;
-            color: white;
+            transform: scale(1.05);
         }
 
-        .level-mild { border-color: #52C41A; }
-        .level-mild.active { background: #52C41A; border-color: #52C41A; }
-
-        .level-medium { border-color: #FFA940; }
-        .level-medium.active { background: #FFA940; border-color: #FFA940; }
-
-        .level-savage { border-color: #FF4D4F; }
-        .level-savage.active { background: #FF4D4F; border-color: #FF4D4F; }
+        .level-mild.active { border-color: #52C41A; background: #52C41A; color: white; }
+        .level-medium.active { border-color: #FFA940; background: #FFA940; color: white; }
+        .level-savage.active { border-color: #FF4D4F; background: #FF4D4F; color: white; }
+        .level-mixed.active { border-color: #9254DE; background: #9254DE; color: white; }
 
         .generate-btn {
             width: 100%;
@@ -250,7 +202,7 @@
             border: none;
             border-radius: 12px;
             font-size: 1.3em;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
@@ -261,14 +213,10 @@
             box-shadow: 0 8px 20px rgba(255, 107, 107, 0.5);
         }
 
-        .generate-btn:active {
-            transform: translateY(0);
-        }
-
         .generate-btn:disabled {
             background: #ccc;
             cursor: not-allowed;
-            box-shadow: none;
+            transform: none;
         }
 
         .loading {
@@ -295,7 +243,7 @@
         .loading-text {
             color: #FF6B6B;
             font-size: 1.2em;
-            font-family: Arial, sans-serif;
+            font-weight: 600;
         }
 
         .roast-result {
@@ -305,7 +253,6 @@
             border-radius: 15px;
             padding: 30px;
             margin-top: 30px;
-            position: relative;
         }
 
         .roast-result h3 {
@@ -319,7 +266,6 @@
             font-size: 1.2em;
             line-height: 1.6;
             color: #333;
-            font-family: Arial, sans-serif;
             margin-bottom: 20px;
         }
 
@@ -333,10 +279,9 @@
             padding: 12px 25px;
             border: none;
             border-radius: 8px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            font-family: Arial, sans-serif;
         }
 
         .btn-copy {
@@ -358,30 +303,20 @@
         }
 
         @media (max-width: 600px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .container {
-                padding: 25px;
-            }
-
-            .level-buttons {
-                grid-template-columns: 1fr;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-            }
+            h1 { font-size: 2em; }
+            .container { padding: 25px; }
+            .level-buttons { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><span class="flame">🔥</span> AI ROAST GENERATOR <span class="flame">🔥</span></h1>
-            <p class="subtitle">Get roasted by AI! (It's all in good fun)</p>
+            <h1>🔥 AI ROAST GENERATOR</h1>
+            <p class="subtitle">Powered by AI - No API key needed!</p>
         </div>
+
+
 
         <div class="warning">
             <p class="warning-text">⚠️ This is for entertainment only! All roasts are AI-generated jokes.</p>
@@ -389,14 +324,14 @@
 
         <div class="input-section">
             <div class="input-tabs">
-                <button class="tab-btn active" data-tab="text">✍️ Text Only</button>
-                <button class="tab-btn" data-tab="image">📷 Image Only</button>
-                <button class="tab-btn" data-tab="both">🖼️ Text + Image</button>
+                <button class="tab-btn active" data-tab="text">✍️ Text</button>
+                <button class="tab-btn" data-tab="image">📷 Image</button>
+                <button class="tab-btn" data-tab="both">🖼️ Both</button>
             </div>
 
             <div class="input-content active" id="textContent">
-                <label for="roastInput">Tell us about yourself (or someone else):</label>
-                <textarea id="roastInput" placeholder="Example: I'm a software developer who drinks 8 cups of coffee a day and still forgets semicolons..."></textarea>
+                <label>Tell us about yourself:</label>
+                <textarea id="roastInput" placeholder="I'm a developer who codes at 3 AM and forgets to eat..."></textarea>
             </div>
 
             <div class="input-content" id="imageContent">
@@ -404,29 +339,28 @@
                 <div class="image-upload-area" id="uploadArea">
                     <div id="uploadPrompt">
                         <div class="upload-icon">📸</div>
-                        <p class="upload-text">Click to upload an image</p>
-                        <p class="upload-text" style="font-size: 0.9em; color: #999;">AI will roast what it sees!</p>
+                        <p class="upload-text">Click to upload</p>
                     </div>
-                    <img id="imagePreview" alt="Preview">
-                    <button class="remove-image-btn" id="removeImageBtn" style="display: none;">❌ Remove Image</button>
+                    <img id="imagePreview">
+                    <button class="remove-image-btn" id="removeImageBtn">Remove</button>
                 </div>
-                <input type="file" id="imageInput" accept="image/*">
+                <input type="file" style="display:none" id="imageInput" accept="image/*">
             </div>
 
             <div class="input-content" id="bothContent">
-                <label for="roastInputBoth">Describe yourself:</label>
-                <textarea id="roastInputBoth" placeholder="Example: I'm a software developer who drinks 8 cups of coffee a day..."></textarea>
+                <label>Describe yourself:</label>
+                <textarea id="roastInputBoth" placeholder="Tell us about yourself..."></textarea>
                 
-                <label style="margin-top: 20px;">Upload an image too:</label>
+                <label style="margin-top: 20px;">Upload an image:</label>
                 <div class="image-upload-area" id="uploadAreaBoth">
                     <div id="uploadPromptBoth">
                         <div class="upload-icon">📸</div>
-                        <p class="upload-text">Click to upload an image</p>
+                        <p class="upload-text">Click to upload</p>
                     </div>
-                    <img id="imagePreviewBoth" alt="Preview">
-                    <button class="remove-image-btn" id="removeImageBtnBoth" style="display: none;">❌ Remove Image</button>
+                    <img id="imagePreviewBoth">
+                    <button class="remove-image-btn" id="removeImageBtnBoth">Remove</button>
                 </div>
-                <input type="file" id="imageInputBoth" accept="image/*">
+                <input type="file" style="display:none" id="imageInputBoth" accept="image/*">
             </div>
         </div>
 
@@ -441,6 +375,9 @@
                 </button>
                 <button class="level-btn level-savage" data-level="savage">
                     💀 Savage<br><small>No Mercy!</small>
+                </button>
+                <button class="level-btn level-mixed" data-level="mixed">
+                    🎲 Mixed<br><small>Surprise Me!</small>
                 </button>
             </div>
         </div>
@@ -457,38 +394,34 @@
             <div class="roast-text" id="roastText"></div>
             <div class="action-buttons">
                 <button class="btn btn-copy" id="copyBtn">📋 Copy</button>
-                <button class="btn btn-another" id="anotherBtn">🔄 Another Roast</button>
+                <button class="btn btn-another" id="anotherBtn">🔄 Another</button>
             </div>
         </div>
     </div>
 
     <script>
-        const roastInput = document.getElementById('roastInput');
-        const roastInputBoth = document.getElementById('roastInputBoth');
+        // YOUR BACKEND URL - Change this after deploying backend
+        const BACKEND_URL = 'http://localhost:3000'; // Change to: https://your-backend.onrender.com
+
         const generateBtn = document.getElementById('generateBtn');
         const loading = document.getElementById('loading');
         const roastResult = document.getElementById('roastResult');
         const roastText = document.getElementById('roastText');
-        const copyBtn = document.getElementById('copyBtn');
-        const anotherBtn = document.getElementById('anotherBtn');
-        const levelButtons = document.querySelectorAll('.level-btn');
         const tabButtons = document.querySelectorAll('.tab-btn');
         const inputContents = document.querySelectorAll('.input-content');
+        const levelButtons = document.querySelectorAll('.level-btn');
 
-        // Image upload elements
         const imageInput = document.getElementById('imageInput');
         const imageInputBoth = document.getElementById('imageInputBoth');
         const uploadArea = document.getElementById('uploadArea');
         const uploadAreaBoth = document.getElementById('uploadAreaBoth');
         const imagePreview = document.getElementById('imagePreview');
         const imagePreviewBoth = document.getElementById('imagePreviewBoth');
-        const uploadPrompt = document.getElementById('uploadPrompt');
-        const uploadPromptBoth = document.getElementById('uploadPromptBoth');
         const removeImageBtn = document.getElementById('removeImageBtn');
         const removeImageBtnBoth = document.getElementById('removeImageBtnBoth');
 
-        let selectedLevel = 'medium';
         let currentTab = 'text';
+        let selectedLevel = 'medium';
         let uploadedImage = null;
         let uploadedImageBoth = null;
 
@@ -497,10 +430,8 @@
             btn.addEventListener('click', () => {
                 tabButtons.forEach(b => b.classList.remove('active'));
                 inputContents.forEach(c => c.classList.remove('active'));
-                
                 btn.classList.add('active');
                 currentTab = btn.dataset.tab;
-                
                 document.getElementById(currentTab + 'Content').classList.add('active');
             });
         });
@@ -514,31 +445,31 @@
             });
         });
 
-        // Image upload handlers
+        // Image uploads
         uploadArea.addEventListener('click', () => imageInput.click());
         uploadAreaBoth.addEventListener('click', () => imageInputBoth.click());
 
-        imageInput.addEventListener('change', (e) => handleImageUpload(e, imagePreview, uploadPrompt, removeImageBtn, 'image'));
-        imageInputBoth.addEventListener('change', (e) => handleImageUpload(e, imagePreviewBoth, uploadPromptBoth, removeImageBtnBoth, 'both'));
+        imageInput.addEventListener('change', (e) => handleImage(e, imagePreview, removeImageBtn, 'uploadPrompt', 'image'));
+        imageInputBoth.addEventListener('change', (e) => handleImage(e, imagePreviewBoth, removeImageBtnBoth, 'uploadPromptBoth', 'both'));
 
         removeImageBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            removeImage(imageInput, imagePreview, uploadPrompt, removeImageBtn, 'image');
+            clearImage(imageInput, imagePreview, removeImageBtn, 'uploadPrompt', 'image');
         });
 
         removeImageBtnBoth.addEventListener('click', (e) => {
             e.stopPropagation();
-            removeImage(imageInputBoth, imagePreviewBoth, uploadPromptBoth, removeImageBtnBoth, 'both');
+            clearImage(imageInputBoth, imagePreviewBoth, removeImageBtnBoth, 'uploadPromptBoth', 'both');
         });
 
-        function handleImageUpload(e, preview, prompt, removeBtn, type) {
+        function handleImage(e, preview, removeBtn, promptId, type) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = (event) => {
                     preview.src = event.target.result;
                     preview.style.display = 'block';
-                    prompt.style.display = 'none';
+                    document.getElementById(promptId).style.display = 'none';
                     removeBtn.style.display = 'inline-block';
                     
                     if (type === 'image') {
@@ -551,11 +482,10 @@
             }
         }
 
-        function removeImage(input, preview, prompt, removeBtn, type) {
+        function clearImage(input, preview, removeBtn, promptId, type) {
             input.value = '';
             preview.style.display = 'none';
-            preview.src = '';
-            prompt.style.display = 'block';
+            document.getElementById(promptId).style.display = 'block';
             removeBtn.style.display = 'none';
             
             if (type === 'image') {
@@ -565,28 +495,28 @@
             }
         }
 
+        // Generate roast
         generateBtn.addEventListener('click', async () => {
-            let textInput = '';
-            let imageData = null;
+            let text = '';
+            let image = null;
 
-            // Get input based on current tab
             if (currentTab === 'text') {
-                textInput = roastInput.value.trim();
-                if (!textInput) {
-                    alert('Please tell us something about yourself first!');
+                text = document.getElementById('roastInput').value.trim();
+                if (!text) {
+                    alert('Please enter some text!');
                     return;
                 }
             } else if (currentTab === 'image') {
-                imageData = uploadedImage;
-                if (!imageData) {
-                    alert('Please upload an image first!');
+                image = uploadedImage;
+                if (!image) {
+                    alert('Please upload an image!');
                     return;
                 }
-            } else if (currentTab === 'both') {
-                textInput = roastInputBoth.value.trim();
-                imageData = uploadedImageBoth;
-                if (!textInput && !imageData) {
-                    alert('Please provide text and/or upload an image!');
+            } else {
+                text = document.getElementById('roastInputBoth').value.trim();
+                image = uploadedImageBoth;
+                if (!text && !image) {
+                    alert('Please provide text and/or image!');
                     return;
                 }
             }
@@ -596,76 +526,29 @@
             roastResult.style.display = 'none';
 
             try {
-                const levelDescriptions = {
-                    mild: 'playful and lighthearted, appropriate for all ages',
-                    medium: 'witty and clever with some edge, but still good-natured',
-                    savage: 'absolutely brutal and hilarious, no holds barred (but not offensive or mean-spirited)'
-                };
-
-                const messages = [{
-                    role: 'user',
-                    content: []
-                }];
-
-                // Add image if present
-                if (imageData) {
-                    messages[0].content.push({
-                        type: 'image',
-                        source: {
-                            type: 'base64',
-                            media_type: 'image/jpeg',
-                            data: imageData.split(',')[1]
-                        }
-                    });
-                }
-
-                // Add text prompt
-                let promptText = `You are a professional roast comedian. Create a ${levelDescriptions[selectedLevel]} roast`;
-                
-                if (imageData && textInput) {
-                    promptText += ` based on this image AND this information: "${textInput}"`;
-                } else if (imageData) {
-                    promptText += ` based on what you see in this image`;
-                } else {
-                    promptText += ` based on this information: "${textInput}"`;
-                }
-
-                promptText += `
-
-The roast should be:
-- Funny and creative
-- ${levelDescriptions[selectedLevel]}
-- 3-5 sentences long
-- Not offensive or discriminatory
-- All in good fun
-
-Just give me the roast text, no preamble or explanation.`;
-
-                messages[0].content.push({
-                    type: 'text',
-                    text: promptText
-                });
-
-                const response = await fetch('https://api.anthropic.com/v1/messages', {
+                const response = await fetch(`${BACKEND_URL}/api/roast`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        model: 'claude-sonnet-4-20250514',
-                        max_tokens: 500,
-                        messages: messages
+                        text,
+                        image,
+                        level: selectedLevel
                     })
                 });
 
                 const data = await response.json();
-                const roast = data.content.find(item => item.type === 'text')?.text || 'Error generating roast!';
 
-                roastText.textContent = roast;
+                if (!data.success) {
+                    throw new Error(data.error || 'Failed to generate roast');
+                }
+
+                roastText.textContent = data.roast;
                 roastResult.style.display = 'block';
 
             } catch (error) {
-                alert('Error generating roast: ' + error.message);
+                alert('Error: ' + error.message + '\n\nMake sure your backend is running!');
                 console.error(error);
             }
 
@@ -673,20 +556,18 @@ Just give me the roast text, no preamble or explanation.`;
             generateBtn.disabled = false;
         });
 
-        copyBtn.addEventListener('click', () => {
+        // Copy button
+        document.getElementById('copyBtn').addEventListener('click', () => {
             navigator.clipboard.writeText(roastText.textContent);
-            copyBtn.textContent = '✅ Copied!';
+            document.getElementById('copyBtn').textContent = '✅ Copied!';
             setTimeout(() => {
-                copyBtn.textContent = '📋 Copy';
+                document.getElementById('copyBtn').textContent = '📋 Copy';
             }, 2000);
         });
 
-        anotherBtn.addEventListener('click', () => {
-            roastResult.style.display = 'none';
-            roastInput.value = '';
-            roastInputBoth.value = '';
-            removeImage(imageInput, imagePreview, uploadPrompt, removeImageBtn, 'image');
-            removeImage(imageInputBoth, imagePreviewBoth, uploadPromptBoth, removeImageBtnBoth, 'both');
+        // Another roast
+        document.getElementById('anotherBtn').addEventListener('click', () => {
+            generateBtn.click();
         });
     </script>
 </body>
